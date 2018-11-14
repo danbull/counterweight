@@ -93,3 +93,13 @@ main {
     align-self: center;
   }
 }
+
+.editorial-article {
+  small {
+    line-height: 1.75;
+
+    > span {
+      font-weight: bold;
+    }
+  }
+}

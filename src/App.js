@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Editorial from './components/Editorial';
 import Siema from 'siema';
+import data from './data';
 
 import './App.css';
 
@@ -27,9 +28,10 @@ class App extends Component {
         <Header />
         <main>
           <div id="slider" ref={this.slider}>
-            <Editorial />
-            <Editorial />
-            <Editorial />
+            {data.editorial.map(article => {
+              return(<Editorial headline={article.headline} image={article.image} link={article.link} whyshow={article.whyshow}/>)
+            })}
+          }
           </div>
         </main>
         <Footer />

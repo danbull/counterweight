@@ -63,3 +63,8 @@ main {
     padding: 7.5px 15px;
     display: flex;
     align-self: center; }
+
+.editorial-article small {
+  line-height: 1.75; }
+  .editorial-article small > span {
+    font-weight: bold; }
