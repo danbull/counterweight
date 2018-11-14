@@ -5,6 +5,7 @@ import Editorial from './components/Editorial';
 import Siema from 'siema';
 
 import './App.css';
+import LineGraph from './components/LineGraph';
 
 class App extends Component {
   constructor() {
@@ -26,6 +27,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <main>
+          <LineGraph />
           <div id="slider" ref={this.slider}>
             <Editorial />
             <Editorial />
