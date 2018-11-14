@@ -4,6 +4,9 @@ html {
 *, *:before, *:after {
   box-sizing: inherit; }
 
+button {
+  padding: 0; }
+
 body {
   background-color: #EFEDEA;
   font-family: 'Roboto', sans-serif;
@@ -39,7 +42,9 @@ main {
   left: 0;
   right: 0; }
   .footer__left {
-    padding: 15px; }
+    padding: 7.5px 15px;
+    display: flex;
+    align-self: center; }
   .footer__middle {
     flex-grow: 2;
     justify-content: center;
@@ -48,11 +53,13 @@ main {
       width: 80px;
       height: 80px;
       position: relative;
-      top: -40px; }
+      top: -20px; }
       .footer__middle > button > span > svg {
         width: 100% !important;
         height: auto;
         background: white;
         border-radius: 50%; }
   .footer__right {
-    padding: 15px; }
+    padding: 7.5px 15px;
+    display: flex;
+    align-self: center; }
