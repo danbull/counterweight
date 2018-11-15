@@ -5,7 +5,9 @@ html {
   box-sizing: inherit; }
 
 button {
-  padding: 0; }
+  padding: 0;
+  border: 0;
+  background-color: transparent; }
 
 body {
   background-color: #EFEDEA;
@@ -65,6 +67,30 @@ main {
     align-self: center; }
 
 .editorial-article small {
-  line-height: 1.75; }
+  line-height: 1.75;
+  min-height: 60px; }
   .editorial-article small > span {
     font-weight: bold; }
+
+.editorial-article {
+  padding-bottom: 50px; }
+
+.slider-wrapper {
+  position: relative; }
+
+.slider-pagination {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 45px;
+  width: 100%; }
+  .slider-pagination > span {
+    display: inline-block;
+    height: 11.25px;
+    width: 11.25px;
+    background-color: #9d9d9d;
+    border-radius: 50%; }
+    .slider-pagination > span.active {
+      background-color: #1d1d1d; }
+    .slider-pagination > span + span {
+      margin-left: 7.5px; }

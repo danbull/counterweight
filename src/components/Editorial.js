@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 
 class Editorial extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
-      <article className="editorial-article bg-white ba b--black-10 mv4">
+      <article className="editorial-article bg-white ba b--black-10">
         <div className="pv2 ph3">
           <h1 className="f6 ttu tracked">{this.props.headline}</h1>
         </div>

@@ -11,6 +11,8 @@ html {
 
 button {
   padding: 0;
+  border: 0;
+  background-color: transparent;
 }
 
 body {
@@ -97,9 +99,42 @@ main {
 .editorial-article {
   small {
     line-height: 1.75;
+    min-height: 60px;
 
     > span {
       font-weight: bold;
+    }
+  }
+}
+
+.editorial-article {
+  padding-bottom: 50px;
+}
+
+.slider-wrapper {
+  position: relative;
+}
+
+.slider-pagination {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: $spacing-unit * 3;
+  width: 100%;
+
+  > span {
+    display: inline-block;
+    height: $spacing-unit * 0.75;
+    width: $spacing-unit * 0.75;
+    background-color: lighten($black, 50%);
+    border-radius: 50%;
+
+    &.active {
+      background-color: $black;
+    }
+
+    & + span {
+      margin-left: $spacing-unit / 2;
     }
   }
 }
