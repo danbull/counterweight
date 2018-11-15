@@ -10,6 +10,7 @@ class LineGraph extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.addDangerZones = this.addDangerZones.bind(this);
 
         var targetWeight = 83.5;
@@ -35,7 +36,6 @@ class LineGraph extends React.Component {
                 title: false,
             },
         }
-
         var options_vertical = {
             legend: {
                 enabled: false
@@ -71,7 +71,6 @@ class LineGraph extends React.Component {
                 }],
             }],
         }
-
         this.state = { options: options_vertical };
     }
 
@@ -86,6 +85,7 @@ class LineGraph extends React.Component {
         var height = chart.xAxis[0].toPixels(this.data.length - 1) - chart.xAxis[0].toPixels(0)
 
         //Add 'danger zone' 
+
         this.chart.renderer.rect(x1a, x2, width, height).attr({
             'stroke-width': 2,
             fill: 'rgb(255, 0, 0, 0.5)',
@@ -109,7 +109,7 @@ class LineGraph extends React.Component {
                     highcharts={Highcharts}
                     options={this.state.options}
                     ref={'chart'}
-                    callback={this.addDangerZones}
+                    callback={this.addDangerZones} 
                 />
             </div>
         );
