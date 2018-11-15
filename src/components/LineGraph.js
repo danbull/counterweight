@@ -13,7 +13,38 @@ class LineGraph extends React.Component {
         this.setChartInstance = this.setChartInstance.bind(this);
 
         var targetWeight = 83.5;
-        var data = [85.3, 84.2, 84, 83.1, 83.9].map(x => x - targetWeight)
+        var data = [85.3, 84.2, 84, 83.1, 83.9]
+        var data_dif = [85.3, 84.2, 84, 83.1, 83.9].map(x => x - targetWeight)
+
+        var options_horizontal = {
+            legend: {
+                enabled: false
+            },
+            title: null,
+            chart: {
+                type: 'spline',
+            },
+            tooltip: { enabled: false },
+            series: [{
+                color: '#000000',
+                data: data
+            }],
+            xAxis: {
+            },
+            yAxis: {
+                title: false,
+            },
+            annotations: [{
+                labels: [{
+                    point: {
+                        x: data[3], y: data[3], 
+                        xAxis: 0,
+                        yAxis: 0,
+                    },
+                    text: "Today",
+                }],
+            }],
+        }
 
         var options_vertical = {
             legend: {
@@ -27,7 +58,7 @@ class LineGraph extends React.Component {
             tooltip: { enabled: false },
             series: [{
                 color: '#000000',
-                data: data
+                data: data_dif
             }],
             xAxis: {
                 visible: false,
@@ -42,7 +73,7 @@ class LineGraph extends React.Component {
             annotations: [{
                 labels: [{
                     point: {
-                        x: 1, y: data[1], 
+                        x: 1, y: data_dif[1], 
                         xAxis: 0,
                         yAxis: 0,
                     },
@@ -50,7 +81,8 @@ class LineGraph extends React.Component {
                 }],
             }],
         }
-        this.state = { options: options_vertical };
+
+        this.state = { options: options_horizontal };
     }
 
     setChartInstance(chart) {
