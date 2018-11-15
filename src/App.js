@@ -6,6 +6,7 @@ import Siema from 'siema';
 import data from './data';
 
 import './App.css';
+import LineGraph from './components/LineGraph';
 
 class App extends Component {
   constructor() {
@@ -27,6 +28,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <main>
+          <LineGraph />
           <div id="slider" ref={this.slider}>
             {data.editorial.map(article => {
               return(<Editorial headline={article.headline} image={article.image} link={article.link} whyshow={article.whyshow}/>)
