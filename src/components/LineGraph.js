@@ -1,118 +1,100 @@
-import React from 'react'
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
-
-require("highcharts/modules/annotations")(Highcharts);
-window['Highcharts'] = Highcharts;
-
+import React from "react";
+import { Line } from "react-chartjs-2";
 
 class LineGraph extends React.Component {
+  render() {
+    console.log("this.props.targetWeight", this.props.targetWeight);
+    const axisPad = 1;
+    const weighins = this.props.data.datasets[0].data;
+    const maxVal = weighins.reduce((a, b) => Math.max(a, b));
+    const minVal = this.props.targetWeight - 2;
+    const upperRange = this.props.targetWeight + 2;
+    const lowerRange = this.props.targetWeight - 2;
 
-    constructor(props) {
-        super(props);
+    console.log("upperRange", upperRange);
+    console.log("lowerRange", lowerRange);
 
-        this.addDangerZones = this.addDangerZones.bind(this);
+    this.props.data.datasets[2] = {
+      label: "hideLabel",
+      fill: false,
+      backgroundColor: "rgb(223, 51, 51)",
+      borderColor: "#afafaf",
+      borderCapStyle: "butt",
+      borderDash: [10, 5],
+      borderDashOffset: 0.0,
+      cubicInterpolationMode: "monotone",
+      pointBorderColor: "rgba(75,192,192,1)",
+      pointBackgroundColor: "#fff",
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: "rgba(75,192,192,1)",
+      pointHoverBorderColor: "rgba(220,220,220,1)",
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [upperRange, upperRange, upperRange, upperRange, upperRange, upperRange],
+    };
 
-        var targetWeight = 83.5;
-        this.data = [85.3, 84.2, 84, 83.1, 83.9, 82]
-        this.data_dif = this.data.map(x => x - targetWeight)
+    this.props.data.datasets[3] = {
+      label: "Healthy range",
+      fill: false,
+      backgroundColor: "transparent",
+      borderColor: "#afafaf",
+      borderCapStyle: "butt",
+      borderDash: [10, 5],
+      borderDashOffset: 0.0,
+      cubicInterpolationMode: "monotone",
+      pointBorderColor: "rgba(75,192,192,1)",
+      pointBackgroundColor: "#fff",
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: "rgba(75,192,192,1)",
+      pointHoverBorderColor: "rgba(220,220,220,1)",
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [lowerRange, lowerRange, lowerRange, lowerRange, lowerRange, lowerRange],
+    };
 
-        var options_horizontal = {
-            legend: {
-                enabled: false
+    const options = {
+      scales: {
+        yAxes: [
+          {
+            scaleLabel: {
+              display: true,
+              labelString: "Weight in Kg"
             },
-            title: null,
-            chart: {
-                type: 'spline',
+            display: true,
+            ticks: {
+              suggestedMin: minVal - axisPad,
+              suggestedMax: maxVal + axisPad,
+            }
+          },
+        ],
+        xAxes: [
+          {
+            scaleLabel: {
+              display: true,
+              labelString: "Weight in Kg"
             },
-            tooltip: { enabled: false },
-            series: [{
-                color: '#000000',
-                data: this.data
-            }],
-            xAxis: {
-            },
-            yAxis: {
-                title: false,
-            },
+          }
+        ]
+      },
+      legend: {
+      labels: {
+        filter: function(item, chart) {
+          // Logic to remove a particular legend item goes here
+          return !item.text.includes('hideLabel');
         }
-        var options_vertical = {
-            legend: {
-                enabled: false
-            },
-            title: null,
-            chart: {
-                type: 'spline',
-                inverted: true,
-            },
-            tooltip: { enabled: false },
-            series: [{
-                color: '#000000',
-                data: this.data_dif
-            }],
-            xAxis: {
-                visible: false,
-            },
-            yAxis: {
-                title: false,
-                min: -2,
-                max: 2,
-                tickPositions: [-2, -1, 0, 1, 2],
-                endOnTick: true
-            },
-            annotations: [{
-                labels: [{
-                    point: {
-                        x: 1, y: this.data_dif[1], 
-                        xAxis: 0,
-                        yAxis: 0,
-                    },
-                    text: "Today",
-                }],
-            }],
-        }
-        this.state = { options: options_vertical };
+      }
     }
+    };
 
-    addDangerZones(chart) {
-        this.chart = chart;
-
-        var x1a = chart.yAxis[0].toPixels(1);
-        var x1b = chart.yAxis[0].toPixels(-2);
-        var x2 = chart.xAxis[0].toPixels(0);
-
-        var width = chart.yAxis[0].toPixels(2) - chart.yAxis[0].toPixels(1)
-        var height = chart.xAxis[0].toPixels(this.data.length - 1) - chart.xAxis[0].toPixels(0)
-
-        //Add 'danger zone' 
-
-        this.chart.renderer.rect(x1a, x2, width, height).attr({
-            'stroke-width': 2,
-            fill: 'rgb(255, 0, 0, 0.5)',
-            zIndex: 1
-        })
-            .add();
-
-        //Add 'danger zone'
-        this.chart.renderer.rect(x1b, x2, width, height).attr({
-            'stroke-width': 2,
-            fill: 'rgb(255, 255, 0, 0.5)',
-            zIndex: 1
-        })
-            .add();
-    }
-
-    render() {
-        return (
-            <div id="chartContainer">
-                <HighchartsReact
-                    highcharts={Highcharts}
-                    options={this.state.options}
-                    ref={'chart'}
-                    callback={this.addDangerZones} 
-                />
-            </div>
-        );
-    }
+    return (
+      <div id="chartContainer">
+        <Line data={this.props.data} options={options} />
+      </div>
+    );
+  }
 }
 export default LineGraph;

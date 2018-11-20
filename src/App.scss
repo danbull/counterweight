@@ -1,5 +1,6 @@
 $black: rgb(29, 29, 29);
 $spacing-unit: 15px;
+$bottomNavHeight: 160px;
 
 html {
   box-sizing: border-box;
@@ -21,6 +22,10 @@ body {
   max-width: 100%;
   font-size: 17px;
   color: #4A4A4A;
+}
+
+main {
+  padding-bottom:bottomNavHeight;
 }
 
 a > svg {
@@ -137,4 +142,8 @@ main {
       margin-left: $spacing-unit / 2;
     }
   }
+}
+
+.chartjs-render-monitor {
+  background: white;
 }

@@ -13,7 +13,7 @@ class Editorial extends Component {
           alt=""
         />
         <div className="pa3">
-          <a href="#" className="link dim lh-title">
+          <a href="/" className="link dim lh-title">
             {this.props.title}
           </a>
           <small className="gray db pv2">

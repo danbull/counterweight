@@ -16,6 +16,9 @@ body {
   font-size: 17px;
   color: #4A4A4A; }
 
+main {
+  padding-bottom: bottomNavHeight; }
+
 a > svg {
   color: #1d1d1d; }
 
@@ -94,3 +97,6 @@ main {
       background-color: #1d1d1d; }
     .slider-pagination > span + span {
       margin-left: 7.5px; }
+
+.chartjs-render-monitor {
+  background: white; }
