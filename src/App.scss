@@ -1,13 +1,27 @@
 $black: rgb(29, 29, 29);
+$blueberry: rgb(72, 78, 167);
+
 $spacing-unit: 15px;
 $bottomNavHeight: 160px;
+$fontSizeTiny: 10px;
 
 html {
   box-sizing: border-box;
+  font-size: 15px;
 }
 
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input:focus {
+  outline: none;
 }
 
 button {
@@ -18,31 +32,126 @@ button {
 
 body {
   background-color: #EFEDEA;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lato', sans-serif;
   max-width: 100%;
   font-size: 17px;
   color: #4A4A4A;
 }
 
 main {
-  padding-bottom:bottomNavHeight;
+  padding-bottom: $bottomNavHeight;
 }
 
 a > svg {
   color: $black;
 }
 
+h2 {
+  color: white;
+  font-size: 30px;
+}
+
+.button {
+  background: #6369B7;
+  border-radius: 32px;
+  padding: 0 60px;
+  height: 47px;
+  line-height: 47px;
+  display: inline-block;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+
+  &--tiny {
+    font-size: $fontSizeTiny;
+    text-transform: uppercase;
+    padding: 0 15px;
+    height: 25px;
+    line-height: 25px;
+
+  }
+
+  &--icon {
+    background: transparent;
+    color: $black;
+  }
+}
+
+.range-slider {
+  height: 50px;
+
+  &__labels {
+    display: flex;
+
+    > span {
+      flex-grow: 1;
+      font-size: $fontSizeTiny;
+      text-transform: uppercase;
+      font-weight: bold;
+
+      &:first-child {
+        align-self: flex-start;
+      }
+
+      &:last-child {
+        align-self: flex-end;
+        text-align: right;
+      }
+    }
+  }
+  
+  > input[type=range] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    background: rgba(61, 61, 61, 0.3);
+    height: 3px;
+    margin-bottom: $spacing-unit * 1.5;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::-webkit-slider-thumb {
+      position: relative;
+      top: 7px;
+      appearance: none;
+      -webkit-appearance: none;
+      height: 45px;
+      width: 45px;
+      border-radius: 50%;
+      background-color: white;
+      cursor: pointer;
+      margin-top: -14px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.31);
+    }
+  }
+}
+
 .header {
   display: flex;
-  background: white;
+  background: $blueberry;
+  height: 45px;
 
   &__title {
     text-align: center;
     flex-grow: 2;
     align-self: center;
 
-    > span {
+    > a {
       display: inline-block;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: none;
+
+      &::after {
+        content: "®";
+        font-size: 9px;
+        vertical-align: super;
+        margin-left: 0.5em;
+        
+      }
     }
   }
 
@@ -146,4 +255,70 @@ main {
 
 .chartjs-render-monitor {
   background: white;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #3d3d3d;
+  z-index: 100;
+
+  &__footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    > .button { 
+      color: white;
+      font-size: 42px;
+      font-weight: 100;
+    }
+  }
+}
+
+.data-input {
+  display: block;
+  appearance: none;
+  border: none;
+  border-bottom: 1px solid #CBCBCB;
+  width: 100%;
+  font-size: 40px;
+  font-weight: 100;
+  padding: 5px;
+}
+
+.form-group {
+  background: white;
+
+  > p {
+    display: block;
+    margin-bottom: $spacing-unit * 1.5;
+  }
+
+  > .form-input {
+    position: relative;
+    
+    > input {
+      margin-bottom: 15px;
+    }
+  }
+
+  .input-units {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+  }
+
+  .input-label {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: $fontSizeTiny;
+    font-weight: bold;
+  }
 }

@@ -11,18 +11,16 @@ class Header extends Component {
   render() {
     return (
       <header className="header">
-      <div className="header__notifications">
-      <Link to="/">
-        <FontAwesomeIcon icon="bell" size="2x" />
-      </Link>
-      </div>
       <div className="header__title">
-        <span>Counterweight</span>
-      </div>
-      <div className="header__user">
       <Link to="/">
-        <FontAwesomeIcon icon="user" size="2x" />
+        Counterweight
       </Link>
+      </div>
+      <div className="header__user-summary">
+        <span>Week <span>9</span></span>
+        <span className="header__phase">
+          Food reintroduction
+        </span>
       </div>
 
       </header>
