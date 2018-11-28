@@ -45,7 +45,7 @@ class Weight extends Component {
       console.log("data", data);
       this.setState({
         targetWeight:  data.tagetWeight,
-        currentWeight: data.currentWeight //TO DO get latest weight from DB
+        currentWeight: data.weighins[data.weighins.length -1].weight
       })
     });
 
@@ -60,11 +60,13 @@ class Weight extends Component {
           <span>Week 6</span>
         </div>
         <div className="home">
-          <Link to={"/weight-summary"}>Current weight <span className="unit">{this.state.currentWeight}</span></Link>
+          <div className="hero">
+            <Link to={"/weight-summary"}><span></span>Current weight <span className="unit">{this.state.currentWeight}</span></Link>
+          </div>
         </div>
         <div>
         { this.state.showWeightInput === true ? (
-            <RecordWeight closeRecordOverlay={this.closeRecordOverlay} />
+            <RecordWeight currentWeight={this.state.currentWeight} closeRecordOverlay={this.closeRecordOverlay} />
           ) : 
           null }
         </div>
