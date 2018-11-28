@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import base from "./utils/base";
 import RecordWeight from "./components/RecordWeight";
 import "./App.css";
+import ContentBanner from "./components/ContentBanner";
 
 class Weight extends Component {
   constructor() {
@@ -16,7 +17,8 @@ class Weight extends Component {
       currentSlide: 0,
       chartData: null,
       weighins: null,
-      showWeightInput: false
+      showWeightInput: false,
+      weightChangeState: 0,
     };
 
     this.handleRecordWeightClick = this.handleRecordWeightClick.bind(this);
@@ -33,6 +35,27 @@ class Weight extends Component {
     this.setState({
       showWeightInput: false
     })
+  }
+
+  updateWeight(weight) {
+    console.log("New weight:")
+    console.log(weight);
+    
+    let delta = weight - this.state.currentWeight;
+    let weightChange = 0;
+
+    if (delta > 0.2) {
+      weightChange = 1;
+
+    } else if (delta < -0.2) {
+      weightChange = -1;
+
+    }
+    
+    this.setState({
+      weightChangeState: weightChange
+    })
+
   }
 
   componentDidMount() {
@@ -64,7 +87,7 @@ class Weight extends Component {
         </div>
         <div>
         { this.state.showWeightInput === true ? (
-            <RecordWeight currentWeight={this.state.currentWeight} closeRecordOverlay={this.closeRecordOverlay} />
+            <RecordWeight currentWeight={this.state.currentWeight} closeRecordOverlay={this.closeRecordOverlay} updateWeight={this.updateWeight.bind(this)} />
           ) : 
           null }
         </div>
