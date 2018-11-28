@@ -48,8 +48,6 @@ class Weight extends Component {
         currentWeight: data.weighins[data.weighins.length -1].weight
       })
     });
-
-    console.log("this.state.currentWeight", this.state.currentWeight);
   }
 
   render() {

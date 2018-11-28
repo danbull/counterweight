@@ -7,7 +7,6 @@ library.add(faCalendar);
 
 class RecordWeight extends Component {
   render() {
-    console.log("this.");
     return (
       <div className="overlay pa3">
         <div>
