@@ -9,17 +9,12 @@ class WeightResponseCard extends Component {
             image: 'https://sloanreview.mit.edu/content/uploads/2017/04/DL-Mukherjee-Digital-Leadership-Neutrality-Neutral-Culture-1200-300x300.jpg',
             title: 'Default',
             body: 'Some default text',
-            show: this.props.show,
         };
         console.log("In the constructor - " + this.state.show)
     }
 
-    componentWillMount() {
-        this.setAppropriateContent();
-    }
-
     setAppropriateContent(props){
-
+        console.log("Changing content")
         let content; 
 
         if (this.props.weightChangeState === -1 ){
@@ -37,23 +32,28 @@ class WeightResponseCard extends Component {
         } else if (this.props.weightChangeState === 0){
             content = {
                 image: 'http://media.istockphoto.com/vectors/huge-helping-hand-new-business-concept-vector-id530718785?k=6&m=530718785&s=612x612&w=0&h=pArbjjYryXf4eA0eSXBjrkEmWBZgEd3GnFioN0Lp8TU=',
-                title: "Nothing changed",
+                title: "You are maintaining your weight",
                 body: "Here is some super useful content",
-                show: false
             }
         }
+
+        console.log("Changing content")
+        console.log(content)
         this.setState((state,props) => (content));
     }
 
-    close() {
-        this.setState({
-            show: false,
-        })
+    componentWillReceiveProps() {
+        this.setAppropriateContent();
+    }
+
+    closeResponseCard() {
+        this.props.closeResponseCard();
     }
 
     render() {
 
-        const style = this.state.show ? {} : {display: 'none'} ;
+        const style = this.props.show ? {} : {display: 'none'} ;
+        console.log("Are we showing the card? " + this.props.show)
 
         return (
             <div style={style} className="card-container">
@@ -65,7 +65,7 @@ class WeightResponseCard extends Component {
                     <div className="card-body">
                         {this.state.body}
                     </div>
-                    <button className="button close-button" onClick={this.close.bind(this)}>Close</button>
+                    <button className="button close-button" onClick={this.closeResponseCard.bind(this)}>Close</button>
                 </div>
             </div>
         );

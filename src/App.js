@@ -62,12 +62,19 @@ class Weight extends Component {
       weightChange = -1;
     }
 
+    // This should trigger showing the response card but it doesn't
     this.setState({
       weightChangeState: weightChange,
       showResponseCard: true,
     })
 
     console.log("Updated weight, should show response card: " + this.state.showResponseCard)
+  }
+
+  closeResponseCard() {
+    this.setState({
+      showResponseCard: false,
+    })
   }
 
   componentDidMount() {
@@ -95,7 +102,7 @@ class Weight extends Component {
         <div className="home">
           <div className="hero">
             <Link to={"/weight-summary"}><span></span>Current weight <span className="unit">{this.state.currentWeight}</span></Link>
-            <WeightResponseCard weightChangeState={this.state.weightChangeState} show={this.state.showResponseCard}/>
+            <WeightResponseCard weightChangeState={this.state.weightChangeState} show={this.state.showResponseCard} closeResponseCard={this.closeResponseCard.bind(this)}/>
           </div>
         </div>
         <div>
