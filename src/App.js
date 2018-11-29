@@ -5,7 +5,6 @@ import Footer from "./components/Footer";
 import base from "./utils/base";
 import RecordWeight from "./components/RecordWeight";
 import "./App.css";
-import ContentBanner from "./components/WeightResponseCard";
 import WeightResponseCard from "./components/WeightResponseCard";
 
 class Weight extends Component {

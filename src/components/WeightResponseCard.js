@@ -20,19 +20,19 @@ class WeightResponseCard extends Component {
             content = {
                 image: 'http://www.elmundodelpapelpintado.com/242540-large_default/confeti.jpg',
                 title: 'Good work',
-                body: 'Well done!',
+                body: "You are doing great. Lets take note of what went well this week, so that we can maintain this!",
             }
         } else if (this.props.weightChangeState === 1) {
             content = {
                 image: 'http://media.istockphoto.com/vectors/huge-helping-hand-new-business-concept-vector-id530718785?k=6&m=530718785&s=612x612&w=0&h=pArbjjYryXf4eA0eSXBjrkEmWBZgEd3GnFioN0Lp8TU=',
                 title: "Let's get back on track...",
-                body: "Here is some super useful content",
+                body: "In times like these, it's a good idea to take a step back and plan your next stap. Let's try out the 'Stop, Think, Learn, Plan'-module today!",
             }
         } else if (this.props.weightChangeState === 0){
             content = {
-                image: 'http://media.istockphoto.com/vectors/huge-helping-hand-new-business-concept-vector-id530718785?k=6&m=530718785&s=612x612&w=0&h=pArbjjYryXf4eA0eSXBjrkEmWBZgEd3GnFioN0Lp8TU=',
+                image: 'https://www.itsnicethat.com/system/files/042018/5acc9beb7fa44ccc62000002/images_slice_large/SebastianCuri-WarriorPose-Illustration-itsnicethat-0.jpg?1523359320',
                 title: "You are maintaining your weight",
-                body: "Here is some super useful content",
+                body: "Well done on not gaining any weight. How about setting a SMART goal to lose some weight this week?",
             }
         }
 
