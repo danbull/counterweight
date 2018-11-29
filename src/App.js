@@ -67,8 +67,6 @@ class Weight extends Component {
       weightChangeState: weightChange,
       showResponseCard: true,
     })
-
-    console.log("Updated weight, should show response card: " + this.state.showResponseCard)
   }
 
   closeResponseCard() {

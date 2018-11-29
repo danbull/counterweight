@@ -10,7 +10,6 @@ class WeightResponseCard extends Component {
             title: 'Default',
             body: 'Some default text',
         };
-        console.log("In the constructor - " + this.state.show)
     }
 
     setAppropriateContent(props){
@@ -37,8 +36,6 @@ class WeightResponseCard extends Component {
             }
         }
 
-        console.log("Changing content")
-        console.log(content)
         this.setState((state,props) => (content));
     }
 
@@ -53,7 +50,6 @@ class WeightResponseCard extends Component {
     render() {
 
         const style = this.props.show ? {} : {display: 'none'} ;
-        console.log("Are we showing the card? " + this.props.show)
 
         return (
             <div style={style} className="card-container">
