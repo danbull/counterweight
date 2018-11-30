@@ -13,6 +13,7 @@ class RecordWeight extends Component {
 
   updateWeight() {
     this.props.updateWeight(this.state.enteredWeight)
+    this.props.closeRecordOverlay()
   }
 
   render() {
