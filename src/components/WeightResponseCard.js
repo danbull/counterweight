@@ -12,10 +12,9 @@ class WeightResponseCard extends Component {
         };
     }
 
-    setAppropriateContent(props){
-        console.log("Changing content")
-        let content; 
-
+    componentWillMount(){
+        console.log("this.props.weightChangeState", this.props.weightChangeState);
+        let content;
         if (this.props.weightChangeState === -1 ){
             content = {
                 image: 'http://www.elmundodelpapelpintado.com/242540-large_default/confeti.jpg',
@@ -36,11 +35,9 @@ class WeightResponseCard extends Component {
             }
         }
 
-        this.setState((state,props) => (content));
-    }
+        console.log("content", content);
 
-    componentWillReceiveProps() {
-        this.setAppropriateContent();
+        this.setState((state,props) => (content));
     }
 
     closeResponseCard() {
@@ -48,11 +45,8 @@ class WeightResponseCard extends Component {
     }
 
     render() {
-
-        const style = this.props.show ? {} : {display: 'none'} ;
-
         return (
-            <div style={style} className="card-container">
+            <div className="card-container">
                 <div className="response-card">
                     <img alt="description" src={this.state.image} className="response-image" />
                     <div className="card-title">

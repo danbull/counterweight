@@ -20,10 +20,47 @@ class Weight extends Component {
       showWeightInput: false,
       showResponseCard: false,
       weightChangeState: 0,
+      enteredWeight: 0
     };
 
     this.handleRecordWeightClick = this.handleRecordWeightClick.bind(this);
     this.closeRecordOverlay = this.closeRecordOverlay.bind(this);
+  }
+
+  updateWeight() {
+    // In reality it should be something like this:
+    // delta-time = time-of-last-weight-measurement - time-of-current-weight-measurement (get in hours, between 0 and 24)
+    // delta-weight = new weight - last-weight  
+    // allowed-weight-fluctuation = delta-time / 24 *  2.5 KG (= maximum normal weight fluctuation) 
+    // if (abs(delta-weight) < allowed-weight-fluctuation) {
+    //  'nothing to see here' 
+    // else {
+    // positive or negative weight loss  
+    // }
+
+    this.setState({
+      showWeightInput: false
+    })
+
+    const delta = this.state.enteredWeight - this.state.currentWeight;
+    let weightChange = 0;
+
+    if (delta > 0.5) {
+      weightChange = 1;
+    } else if (delta < -0.5) {
+      weightChange = -1;
+    }
+    console.log("weightChange", weightChange);
+
+    this.setState({
+      weightChangeState: weightChange,
+      showResponseCard: true
+    })
+  }
+
+
+  handleWeightChange(event) {
+    this.setState({enteredWeight: event.target.value})
   }
 
   handleRecordWeightClick() {
@@ -38,37 +75,8 @@ class Weight extends Component {
     })
   }
 
-  updateWeight(weight) {
-    console.log("New weight: ")
-    console.log(weight);
-
-    // In reality it should be something like this:
-    // delta-time = time-of-last-weight-measurement - time-of-current-weight-measurement (get in hours, between 0 and 24)
-    // delta-weight = new weight - last-weight  
-    // allowed-weight-fluctuation = delta-time / 24 *  2.5 KG (= maximum normal weight fluctuation) 
-    // if (abs(delta-weight) < allowed-weight-fluctuation) {
-    //  'nothing to see here' 
-    // else {
-    // positive or negative weight loss  
-    // }
-
-    let delta = weight - this.state.currentWeight;
-    let weightChange = 0;
-
-    if (delta > 0.5) {
-      weightChange = 1;
-    } else if (delta < -0.5) {
-      weightChange = -1;
-    }
-
-    // This should trigger showing the response card but it doesn't
-    this.setState({
-      weightChangeState: weightChange,
-      showResponseCard: true,
-    })
-  }
-
   closeResponseCard() {
+    console.log("closeResponseCard");
     this.setState({
       showResponseCard: false,
     })
@@ -81,7 +89,6 @@ class Weight extends Component {
         asArray: false
       })
       .then(data => {
-        console.log("data", data);
         this.setState({
           targetWeight: data.tagetWeight,
           currentWeight: data.weighins[data.weighins.length - 1].weight
@@ -99,12 +106,17 @@ class Weight extends Component {
         <div className="home">
           <div className="hero">
             <Link to={"/weight-summary"}><span></span>Current weight <span className="unit">{this.state.currentWeight}</span></Link>
-            <WeightResponseCard weightChangeState={this.state.weightChangeState} show={this.state.showResponseCard} closeResponseCard={this.closeResponseCard.bind(this)}/>
+            { this.state.showResponseCard === true ? (
+              <WeightResponseCard weightChangeState={this.state.weightChangeState} closeResponseCard={this.closeResponseCard.bind(this)}/>
+            ) : (
+              null
+            )
+            }
           </div>
         </div>
         <div>
           {this.state.showWeightInput === true ? (
-            <RecordWeight currentWeight={this.state.currentWeight} closeRecordOverlay={this.closeRecordOverlay} updateWeight={this.updateWeight.bind(this)} />
+            <RecordWeight handleWeightChange={this.handleWeightChange.bind(this)} currentWeight={this.state.currentWeight} closeRecordOverlay={this.closeRecordOverlay.bind(this)} updateWeight={this.updateWeight.bind(this)} />
           ) :
             null}
         </div>

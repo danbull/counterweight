@@ -7,15 +7,6 @@ library.add(faCalendar);
 
 class RecordWeight extends Component {
 
-  handleChange(event) {
-    this.setState({enteredWeight: event.target.value})
-  }
-
-  updateWeight() {
-    this.props.updateWeight(this.state.enteredWeight)
-    this.props.closeRecordOverlay()
-  }
-
   render() {
     return (
       <div className="overlay pa3">
@@ -24,7 +15,7 @@ class RecordWeight extends Component {
         </div>
         <div className="form-group center pa3 hidden ba mv3">
           <div className="form-input">
-            <input className="data-input" type="number" onInput={this.handleChange.bind(this)}/>
+            <input className="data-input" type="number" onInput={this.props.handleWeightChange}/>
             <span className="input-units">kg</span>
           </div>
             <div>
@@ -46,7 +37,7 @@ class RecordWeight extends Component {
           </div>
         </div>
         <div className="tc mv4">
-          <button className="button" onClick={this.updateWeight.bind(this)}>Add Entry</button>
+          <button className="button" onClick={this.props.updateWeight}>Add Entry</button>
         </div>
         <div className="overlay__footer pa3 tc">
           <button onClick={this.props.closeRecordOverlay} className="button button--icon">×</button>
