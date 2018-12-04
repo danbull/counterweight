@@ -6,6 +6,7 @@ import base from "./utils/base";
 import RecordWeight from "./components/RecordWeight";
 import "./App.css";
 import WeightResponseCard from "./components/WeightResponseCard";
+import { auth, firebaseApp} from "./utils/base";
 
 class Weight extends Component {
   constructor() {
@@ -95,6 +96,26 @@ class Weight extends Component {
         })
       });
   }
+
+  componentWillMount() {
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          authenticated: true,
+          currentUser: user,
+          loading: false
+        });
+      } else {
+        this.setState({
+          authenticated: false,
+          currentUser: null,
+          loading: false
+        });
+      }
+    });
+  }
+
 
   render() {
     return (
