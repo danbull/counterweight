@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import base from "./utils/base";
 import RecordWeight from "./components/RecordWeight";
 import "./App.css";
+
+library.add(faChevronRight);
 
 class Weight extends Component {
   constructor() {
@@ -16,7 +21,8 @@ class Weight extends Component {
       currentSlide: 0,
       chartData: null,
       weighins: null,
-      showWeightInput: false
+      showWeightInput: false,
+      lastTracked: null
     };
 
     this.handleRecordWeightClick = this.handleRecordWeightClick.bind(this);
@@ -45,21 +51,24 @@ class Weight extends Component {
       console.log("data", data);
       this.setState({
         targetWeight:  data.tagetWeight,
-        currentWeight: data.weighins[data.weighins.length -1].weight
+        currentWeight: data.weighins[data.weighins.length -1].weight,
+        lastTracked: data.weighins[data.weighins.length -1].date
       })
     });
   }
-
+ 
   render() {
     return (
       <div className="App"> 
         <Header />
-        <div className="progress-status">
-          <span>Week 6</span>
-        </div>
         <div className="home">
           <div className="hero">
-            <Link to={"/weight-summary"}><span></span>Current weight <span className="unit">{this.state.currentWeight}</span></Link>
+            <Link to={"/weight-summary"}>
+              <span>Current weight</span>
+              <span>{this.state.currentWeight}</span><span className="unit">kg</span>
+              <span>Last tracked: {this.state.lastTracked}</span>
+              <FontAwesomeIcon icon="chevron-right" size="2x"></FontAwesomeIcon>
+            </Link>
           </div>
         </div>
         <div>

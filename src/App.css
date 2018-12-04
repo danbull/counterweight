@@ -97,9 +97,9 @@ h2 {
   background: #484ea7;
   height: 45px; }
   .header__title {
-    text-align: center;
     flex-grow: 2;
-    align-self: center; }
+    align-self: center;
+    padding-left: 15px; }
     .header__title > a {
       display: inline-block;
       color: white;
@@ -113,8 +113,25 @@ h2 {
         margin-left: 0.5em; }
   .header__notifications {
     padding: 15px; }
-  .header__user {
-    padding: 15px; }
+  .header__user-summary {
+    padding: 12px 45px 10px 0;
+    text-transform: uppercase;
+    color: white;
+    font-size: 10px;
+    text-align: right;
+    position: relative; }
+    .header__user-summary > span {
+      display: block; }
+      .header__user-summary > span:first {
+        font-weight: bold; }
+      .header__user-summary > span > span {
+        font-size: 30px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 15px; }
+  .header__phase {
+    opacity: 0.5; }
 
 main {
   padding: 15px; }
@@ -229,3 +246,36 @@ main {
     font-weight: bold;
     font-size: 10px;
     font-weight: bold; }
+
+.hero {
+  background: #5b60b8;
+  position: relative; }
+  .hero > a {
+    display: block;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px; }
+    .hero > a > span:first-child {
+      font-size: 13px;
+      text-transform: uppercase;
+      display: block; }
+    .hero > a > span + span {
+      font-size: 50px; }
+    .hero > a > span:last-of-type {
+      display: block;
+      font-size: 12px;
+      margin-top: 7.5px;
+      text-transform: none; }
+    .hero > a > svg {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      width: 40px;
+      height: 40px; }
+  .hero .unit {
+    text-transform: lowercase;
+    font-size: 34px;
+    margin-left: 10px; }
