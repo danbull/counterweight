@@ -85,7 +85,7 @@ class Weight extends Component {
 
   componentDidMount() {
     base
-      .fetch("users/cYzlSenFtBVM5GYsLZsIf1vSsKr2", {
+      .fetch("users/"+auth.currentUser.uid, {
         context: this,
         asArray: false
       })
