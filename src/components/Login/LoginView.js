@@ -5,7 +5,7 @@ const LoginView = ({ onSubmit }) => {
     <div>
       <h1>Log In</h1>
       <form onSubmit={onSubmit}>
-        <label>
+        <label className="label">
           Email
           <input
             name="email"

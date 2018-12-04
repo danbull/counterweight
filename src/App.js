@@ -116,7 +116,6 @@ class Weight extends Component {
     });
   }
 
-
   render() {
     return (
       <div className="App">
