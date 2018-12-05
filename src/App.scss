@@ -134,9 +134,9 @@ h2 {
   height: 45px;
 
   &__title {
-    text-align: center;
     flex-grow: 2;
     align-self: center;
+    padding-left: $spacing-unit;
 
     > a {
       display: inline-block;
@@ -150,7 +150,6 @@ h2 {
         font-size: 9px;
         vertical-align: super;
         margin-left: 0.5em;
-        
       }
     }
   }
@@ -159,8 +158,33 @@ h2 {
     padding: $spacing-unit;
   }
 
-  &__user {
-    padding: $spacing-unit;
+  &__user-summary {
+    padding: 12px ($spacing-unit + 30px) 10px 0;
+    text-transform: uppercase;
+    color: white;
+    font-size: 10px;
+    text-align: right;  
+    position: relative;
+
+    > span {
+      display: block;
+
+      &:first {
+        font-weight: bold;
+      }
+
+      > span {
+        font-size: 30px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: $spacing-unit;
+      }
+    }
+  }
+
+  &__phase {
+    opacity: 0.5;
   }
 }
 
@@ -317,8 +341,56 @@ main {
 
   .input-label {
     text-transform: uppercase;
-    font-weight: bold;
+    font-weight: bold;  
     font-size: $fontSizeTiny;
     font-weight: bold;
+  }
+}
+
+.hero {
+  background: lighten($blueberry, 7%);
+  position: relative;
+
+  > a {
+    display: block;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: $spacing-unit;
+
+    > span {
+      &:first-child {
+        font-size: 13px;
+        text-transform: uppercase;
+        display: block;
+      }
+
+      & + span {
+        font-size: 50px;
+      }
+
+      &:last-of-type {
+        display: block;
+        font-size: 12px;
+        margin-top: $spacing-unit / 2;
+        text-transform: none;
+      }
+    }
+
+    > svg {
+      position: absolute;
+      right: $spacing-unit;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .unit {
+    text-transform: lowercase;
+    font-size: 34px;
+    margin-left: 10px;
   }
 }

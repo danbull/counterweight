@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import base from "./utils/base";
@@ -7,6 +10,8 @@ import RecordWeight from "./components/RecordWeight";
 import "./App.css";
 import WeightResponseCard from "./components/WeightResponseCard";
 import { auth, firebaseApp} from "./utils/base";
+
+library.add(faChevronRight);
 
 class Weight extends Component {
   constructor() {
@@ -21,7 +26,8 @@ class Weight extends Component {
       showWeightInput: false,
       showResponseCard: false,
       weightChangeState: 0,
-      enteredWeight: 0
+      enteredWeight: 0,
+      lastTracked: null
     };
 
     this.handleRecordWeightClick = this.handleRecordWeightClick.bind(this);
@@ -85,9 +91,16 @@ class Weight extends Component {
 
   componentDidMount() {
     base
-      .fetch("users/"+auth.currentUser.uid, {
-        context: this,
-        asArray: false
+     .fetch("users/"+auth.currentUser.uid, {
+       context: this,
+       asArray: false
+    })
+    .then(data => {
+      console.log("data", data);
+      this.setState({
+        targetWeight:  data.tagetWeight,
+        currentWeight: data.weighins[data.weighins.length -1].weight,
+        lastTracked: data.weighins[data.weighins.length -1].date
       })
       .then(data => {
         this.setState({
@@ -115,23 +128,25 @@ class Weight extends Component {
       }
     });
   }
-
+ 
   render() {
     return (
       <div className="App">
         <Header />
-        <div className="progress-status">
-          <span>Week 6</span>
-        </div>
         <div className="home">
           <div className="hero">
-            <Link to={"/weight-summary"}><span></span>Current weight <span className="unit">{this.state.currentWeight}</span></Link>
             { this.state.showResponseCard === true ? (
               <WeightResponseCard weightChangeState={this.state.weightChangeState} closeResponseCard={this.closeResponseCard.bind(this)}/>
             ) : (
               null
             )
             }
+            <Link to={"/weight-summary"}>
+              <span>Current weight</span>
+              <span>{this.state.currentWeight}</span><span className="unit">kg</span>
+              <span>Last tracked: {this.state.lastTracked}</span>
+              <FontAwesomeIcon icon="chevron-right" size="2x"></FontAwesomeIcon>
+            </Link>
           </div>
         </div>
         <div>

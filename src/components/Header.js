@@ -6,7 +6,6 @@ import { faBell, faUser, faPlusCircle } from "@fortawesome/free-solid-svg-icons"
 
 library.add(faBell, faUser, faPlusCircle);
 
-
 class Header extends Component {
   render() {
     return (
