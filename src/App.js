@@ -108,6 +108,7 @@ class Weight extends Component {
           currentWeight: data.weighins[data.weighins.length - 1].weight
         })
       });
+    });
   }
 
   componentWillMount() {
